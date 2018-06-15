@@ -49,7 +49,8 @@ ssize_t fill_data(char *data, char *filename){
 
 int send_esp_packet(char *ip, char *port, char *filename){
 	int server, ret, data_size;
-	char packet[4096] = {0}, *data;
+	char packet[4096] = {0};
+	char *data;
 	struct iphdr *iph;
 	struct ip_esp_hdr *esph;
 	struct sockaddr_in sin;
@@ -111,14 +112,17 @@ int main(int argc, char **argv){
 	while ((opt = getopt (argc, argv, "i:p:f:")) != -1){
 		switch (opt){
 		case 'i':
-				ip = optarg; break;
+			ip = optarg;
+			break;
 		case 'p':
-				port = optarg; break;
+			port = optarg;
+			break;
 		case 'f':
-				filename = optarg; break;
+			filename = optarg;
+			break;
 		default:
-				printf("Usage: %s -i [ip] -p [port] -f [filename]\n", argv[0]);
-				return -1;
+			printf("Usage: %s -i [ip] -p [port] -f [filename]\n", argv[0]);
+			return -1;
 		}
 	}
 
